@@ -1,6 +1,6 @@
 # DQPlacePick
 
-```oc
+```objective-c
 -(void)btnClick:(UIButton *)button{
     __weak typeof(self) weakSelf = self;
     PlacePickMainController *vc = [[PlacePickMainController alloc] init];
