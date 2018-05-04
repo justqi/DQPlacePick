@@ -1,0 +1,78 @@
+//
+//  PrefixHeader.pch
+//  DecoPlacePick
+//
+//  Created by 邓奇 on 2018/5/4.
+//  Copyright © 2018年 http://www.cnblogs.com/justqi/. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+/**********
+ 屏幕宽高
+ */
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
+
+
+// 判断是否是iPhone X
+#define Is_Iphone_X ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+#define StatusBarHeight (Is_Iphone_X ? 44.f : 20.f)// 状态栏高度
+#define NavigationBarHeight (Is_Iphone_X ? 82 : 70) //使用自定义比实际的(88 : 64)高出6
+#define TabBarHight (Is_Iphone_X ? 84 : 50) //比实际的(83 : 49)高出1
+#define BottomHeight (Is_Iphone_X ? 34 : 0) //底部约束有tabbar就用TabbarHeight，没有就用BottomHeight
+
+// 弱引用
+#define MJWeakSelf __weak typeof(self) weakSelf = self;
+
+//提示框-------cancelStr:cancelStr 千万不要取相同的
+#define AlertShowWithMessage(messageStr,cancelStr,okStr,cancelBlock,okBlock) [CustomAlertEvent aletrViewWithMsg:messageStr andCancelStr:cancelStr andOkStr:okStr andCancelBlock:cancelBlock andOkBlock:okBlock];
+
+/**
+ *  the saving objects      存储对象
+ *
+ *  @param __VALUE__ V
+ *  @param __KEY__   K
+ *
+ *  @return
+ */
+#define ZXUserDefaultSetObjectForKey(__VALUE__,__KEY__) \
+{\
+[[NSUserDefaults standardUserDefaults] setObject:__VALUE__ forKey:__KEY__];\
+[[NSUserDefaults standardUserDefaults] synchronize];\
+}
+
+/**
+ *  get the saved objects       获得存储的对象
+ */
+#define ZXUserDefaultObjectForKey(__KEY__)  [[NSUserDefaults standardUserDefaults] objectForKey:__KEY__]
+
+/**
+ *  delete objects      删除对象
+ */
+#define ZXUserDefaultRemoveObjectForKey(__KEY__) \
+{\
+[[NSUserDefaults standardUserDefaults] removeObjectForKey:__KEY__];\
+[[NSUserDefaults standardUserDefaults] synchronize];\
+}
+
+
+#define UDFDictGeography   @"DictGeography"//省市区资料
+#define UserDataHistoryProvince   @"HistoryProvinceData"//选择的省份-历史记录
+#define UserDataHistoryProCity   @"HistoryProCityData"//选择的省市-历史记录
+#define UserDataHistoryProCityCountry   @"HistoryProCityCountryData"//选择的省市区-历史记录
+
+
+#ifdef __OBJC__
+
+#import "UIView+DQExtention.h"
+#import "CustomAlertEvent.h"
+
+
+#endif
+
+#endif /* PrefixHeader_pch */
